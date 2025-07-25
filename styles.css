@@ -4,3 +4,14 @@
     font-family: "Lato", sans-serif;
     font-style: normal;
 }
+html{
+  scroll-behavior: smooth;
+}
+
+.button{
+    border-radius: 16px;
+    border : 1px solid rgba(14, 122, 129, 0.15); 
+    padding:  24px 85px 24px 85px;
+    font-weight: 700;
+    font-size: 24px;
+}

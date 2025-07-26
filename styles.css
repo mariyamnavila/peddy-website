@@ -15,3 +15,10 @@ html{
     font-weight: 700;
     font-size: 24px;
 }
+
+.pet-button{
+    padding: 10px 20px;
+    border: 1px solid #0E7A8126 ;
+    color: #0E7A81;
+    border-radius: 8px;
+}

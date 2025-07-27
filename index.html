@@ -51,24 +51,43 @@
             </div>
             <div class="flex justify-between items-center my-8">
                 <p class="font-black text-2xl ">Best Deal For you</p>
-                <button class="btn border-none bg-[#0E7A81] text-white">Sort by Price</button>
+                <button onclick="displayLoader()" id="sortPrice" class="btn border-none bg-[#0E7A81] text-white">Sort by
+                    Price</button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 <div id="pets-container"
                     class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 md:col-span-1 lg:col-span-3 gap-6">
-                
+
                 </div>
                 <div class="grid grid-cols-2 border rounded-xl">
 
                 </div>
             </div>
         </section>
+        <!-- adopt modal -->
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn hidden" onclick="adoptModal.showModal()">open modal</button>
+        <dialog id="adoptModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box space-y-2" id="modal">
+                <img class="mx-auto w-24" src="images/handshake.png" alt="">
+                <h3 class="text-center font-black text-3xl">Congrats</h3>
+                <p class="text-center font-semibold">Adoption Process is Start For your Pet</p>
+                <p class="text-center"><span id="countdown" class="text-center font-bold text-6xl"></span></p>
+                <!-- <div class="modal-action">
+                    <form method="dialog">
+                        if there is a button in form, it will close the modal
+                        <button class="btn">Close</button>
+                    </form>
+                </div> -->
+            </div>
+        </dialog>
+        <!-- details modal -->
         <!-- Open the modal using ID.showModal() method -->
         <button class="btn hidden" onclick="customModal.showModal()">open modal</button>
         <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
-                <div id="modal-container" >
-                    
+                <div id="modal-container">
+
                 </div>
                 <div class="modal-action">
                     <form method="dialog" class="w-full">

@@ -1,94 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
 
 .font-lato {
-    font-family: "Lato", sans-serif;
-    font-style: normal;
+  font-family: "Lato", sans-serif;
+  font-style: normal;
 }
-html{
+
+html {
   scroll-behavior: smooth;
 }
 
-.button{
-    border-radius: 16px;
-    border : 1px solid rgba(14, 122, 129, 0.15); 
-    padding:  24px 85px 24px 85px;
-    font-weight: 700;
-    font-size: 24px;
+body {
+  /* overflow: auto !important; */
+  overflow: visible;
 }
 
-.pet-button{
-    padding: 10px 20px;
-    border: 1px solid #0E7A8126 ;
-    color: #0E7A81;
-    border-radius: 8px;
+.button {
+  border-radius: 16px;
+  border: 1px solid rgba(14, 122, 129, 0.15);
+  padding: 24px 85px 24px 85px;
+  font-weight: 700;
+  font-size: 24px;
 }
 
-
-/* From Uiverse.io by alexruix */ 
-/* .loader {
-  position: relative;
-  width: 120px;
-  height: 90px;
-  margin: 0 auto;
+.active {
+  border: 1.5px solid rgb(14, 122, 129);
+  border-radius: 120px;
+  background: rgba(14, 122, 129, 0.1);
+  padding: 24px 85px 24px 85px;
+  font-weight: 700;
+  font-size: 24px;
 }
 
-.loader:before {
-  content: "";
-  position: absolute;
-  bottom: 30px;
-  left: 50px;
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-  background: #2a9d8f;
-  animation: loading-bounce 0.5s ease-in-out infinite alternate;
+.pet-button {
+  padding: 10px 20px;
+  border: 1px solid #0E7A8126;
+  color: #0E7A81;
+  border-radius: 8px;
 }
 
-.loader:after {
-  content: "";
-  position: absolute;
-  right: 0;
-  top: 0;
-  height: 7px;
-  width: 45px;
-  border-radius: 4px;
-  box-shadow: 0 5px 0 #f2f2f2, -35px 50px 0 #f2f2f2, -70px 95px 0 #f2f2f2;
-  animation: loading-step 1s ease-in-out infinite;
+.pet-button:hover {
+  background-color: #0E7A81;
+  color: white;
 }
-
-@keyframes loading-bounce {
-  0% {
-    transform: scale(1, 0.7);
-  }
-
-  40% {
-    transform: scale(0.8, 1.2);
-  }
-
-  60% {
-    transform: scale(1, 1);
-  }
-
-  100% {
-    bottom: 140px;
-  }
-}
-
-@keyframes loading-step {
-  0% {
-    box-shadow: 0 10px 0 rgba(0, 0, 0, 0),
-            0 10px 0 #f2f2f2,
-            -35px 50px 0 #f2f2f2,
-            -70px 90px 0 #f2f2f2;
-  }
-
-  100% {
-    box-shadow: 0 10px 0 #f2f2f2,
-            -35px 50px 0 #f2f2f2,
-            -70px 90px 0 #f2f2f2,
-            -70px 90px 0 rgba(0, 0, 0, 0);
-  }
-} */
 
 /* HTML: <div class="loader"></div> */
 .loader {
@@ -97,13 +50,22 @@ html{
   aspect-ratio: 1;
   border-radius: 50%;
   background: #25b09b;
-  --_m: 
-    conic-gradient(#0000 10%,#000),
+  --_m:
+    conic-gradient(#0000 10%, #000),
     linear-gradient(#000 0 0) content-box;
   -webkit-mask: var(--_m);
-          mask: var(--_m);
+  mask: var(--_m);
   -webkit-mask-composite: source-out;
-          mask-composite: subtract;
+  mask-composite: subtract;
   animation: l3 1s infinite linear;
 }
-@keyframes l3 {to{transform: rotate(1turn)}}
+
+@keyframes l3 {
+  to {
+    transform: rotate(1turn)
+  }
+}
+
+.modalBackdrop.in {
+  display: none;
+}

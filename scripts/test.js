@@ -40,3 +40,6 @@
 //         loadCategoriesPets(); // uncomment this if you want to re-fetch all pets
 //     }, 2000);
 // };
+const numbers = [2,57,34,66,653,5,543,]
+const numbers_dsc = [...numbers].sort(function(a,b) {return b - a})
+console.log(numbers_dsc);

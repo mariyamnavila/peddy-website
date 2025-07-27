@@ -1,3 +1,12 @@
+const removeActive = () => {
+    const buttons = document.getElementsByClassName('categoryBtn');
+    for (const button of buttons) {
+        button.classList.remove('active')
+        button.classList.add('button')
+    }
+}
+
+
 const loadCategories = () => {
     fetch('https://openapi.programming-hero.com/api/peddy/categories')
         .then(res => res.json())
@@ -23,29 +32,28 @@ const loadDetails = (petId) => {
 const loadCategoriesPets = (categoriesId) => {
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoriesId}`)
         .then(res => res.json())
-        .then(data => displayPets(data.data))
+        .then(data => {
+            removeActive();
+            const activeBtn = document.getElementById(`btn-${categoriesId}`);
+            activeBtn.classList.add('active')
+            displayPets(data.data)
+        })
         .catch(err => console.log(err))
 }
 
+// const loadSort = () => {
+//     loadPets()
+
+// }
 
 const displayLoader = () => {
     const petsContainer = document.getElementById('pets-container');
-
-    // Store the current pet elements (to restore later)
-    // const existingPets = petsContainer.innerHTML;
-
-    // Show the loader
     petsContainer.innerHTML = `
         <div class="flex justify-center items-center col-span-3 py-10">
             <div class="loader border-4 border-gray-200 border-t-[#0E7A81] rounded-full w-12 h-12 animate-spin"></div>
         </div>
     `;
 
-    // After 2 seconds, load pets again (or any filtered category)
-    // setTimeout(() => {
-    //     // petsContainer.innerHTML = existingPets; // Optional: remove this if you use `loadPets()` or `loadCategoriesPets()`
-    //     loadCategoriesPets(); // uncomment this if you want to re-fetch all pets
-    // }, 2000);
 };
 
 
@@ -97,7 +105,7 @@ const displayCategories = (categories) => {
         // console.log(category);
         const div = document.createElement('div')
         div.innerHTML = `
-            <button id='categoryBtn' onclick="displayLoader(); setTimeout(() => loadCategoriesPets('${category.category}'), 2000);" class="button flex items-center mx-auto">
+            <button id='btn-${category.category}'  onclick="displayLoader(); setTimeout(() => loadCategoriesPets('${category.category}'), 2000);" class="button flex items-center mx-auto categoryBtn">
                 <img class='w-[56px] h-[56px] mr-4' src='${category.category_icon}' />
                 ${category.category}
             </button>
@@ -111,6 +119,121 @@ const displayPets = (pets) => {
     // console.log(pets);
     const petsContainer = document.getElementById('pets-container');
     petsContainer.innerHTML = '';
+
+    if (pets.length === 0) {
+        // videoContainer.classList.remove('grid')
+        petsContainer.innerHTML = `
+    <div class ='py-24 col-span-3 text-center items-center bg-[#13131308] rounded-3xl'>
+        <img class='mx-auto' src='images/error.webp'/>
+        <h2 class='text-center text-3xl font-bold'>No Information Available</h2>
+    </div>
+    `
+        return
+    }
+
+    // const sortByPrice = (pets) => {
+    // const sort = pets.price.sort(function(a,b) {return b - a});
+    // console.log(sort);
+
+    // }
+
+    // const sortPets = () => {
+    //     const sortP =  pets.sort(function (a, b) { return b.price - a.price });
+    //     console.log(sortP);
+        
+    //     pets.forEach((pet) => {
+    //     // console.log(pet);
+    //     const div = document.createElement('div');
+    //     div.classList = 'p-5 space-y-2 border rounded-xl'
+    //     div.innerHTML = `
+    //         <img class='rounded-xl' src="${pet.image}" alt="">
+    //             <p class="font-bold text-xl">${pet.pet_name}</p>
+    //             <div class="flex space-x-2">
+    //                 <img src="images/breed.png" alt="">
+    //                     <p class="text-gray-600">Breed: ${pet.breed === null || pet.breed === undefined || !pet.breed ? 'Not Found' : pet.breed}</p>
+    //             </div>
+    //             <div class="flex space-x-2">
+    //                 <img src="images/birth.png" alt="">
+    //                     <p class="text-gray-600">Birth: ${pet.date_of_birth === null || pet.date_of_birth === undefined ? 'Not Found' : pet.date_of_birth
+
+    //         }</p>
+    //             </div>
+    //             <div class="flex space-x-2">
+    //                 <img src="images/gender.png" alt="">
+    //                     <p class="text-gray-600">Gender: ${pet.gender === null || pet.date_of_birth === 'undefined' || !pet.gender ? 'Not Found' : pet.gender
+
+    //         }</p>
+    //             </div>
+    //             <div class="border-b flex pb-2 space-x-2">
+    //                 <img src="images/price.png" alt="">
+    //                     <p class="text-gray-600">Price: ${pet.price === null || pet.date_of_birth === 'undefined' ? 'Not Found' : pet.price}$</p>
+    //             </div>
+    //             <div class="flex justify-between items-center mt-4">
+    //                 <button class="pet-button">
+    //                     <img src="images/like.png" alt="">
+    //                 </button>
+    //                 <button class="pet-button">Adopt</button>
+    //                 <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
+    //             </div>
+    //             `
+
+
+    //     petsContainer.append(div)
+    // })
+
+    //     return
+    // }
+
+    document.getElementById('sortPrice').addEventListener('click',()=>{
+    petsContainer.innerHTML = '';
+
+        const sortP =  pets.sort(function (a, b) { return b.price - a.price });
+        // console.log(sortP);
+        
+        sortP.forEach((pet) => {
+        console.log(pet);
+        const div = document.createElement('div');
+        div.classList = 'p-5 space-y-2 border rounded-xl'
+        div.innerHTML = `
+            <img class='rounded-xl' src="${pet.image}" alt="">
+                <p class="font-bold text-xl">${pet.pet_name}</p>
+                <div class="flex space-x-2">
+                    <img src="images/breed.png" alt="">
+                        <p class="text-gray-600">Breed: ${pet.breed === null || pet.breed === undefined || !pet.breed ? 'Not Found' : pet.breed}</p>
+                </div>
+                <div class="flex space-x-2">
+                    <img src="images/birth.png" alt="">
+                        <p class="text-gray-600">Birth: ${pet.date_of_birth === null || pet.date_of_birth === undefined ? 'Not Found' : pet.date_of_birth
+
+            }</p>
+                </div>
+                <div class="flex space-x-2">
+                    <img src="images/gender.png" alt="">
+                        <p class="text-gray-600">Gender: ${pet.gender === null || pet.date_of_birth === 'undefined' || !pet.gender ? 'Not Found' : pet.gender
+
+            }</p>
+                </div>
+                <div class="border-b flex pb-2 space-x-2">
+                    <img src="images/price.png" alt="">
+                        <p class="text-gray-600">Price: ${pet.price === null || pet.date_of_birth === 'undefined' ? 'Not Found' : pet.price}$</p>
+                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <button class="pet-button">
+                        <img src="images/like.png" alt="">
+                    </button>
+                    <button class="pet-button">Adopt</button>
+                    <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
+                </div>
+                `
+
+
+        petsContainer.append(div)
+        return
+    })
+
+        
+    })
+    
     pets.forEach((pet) => {
         // console.log(pet);
         const div = document.createElement('div');
@@ -151,5 +274,7 @@ const displayPets = (pets) => {
         petsContainer.append(div)
     })
 }
+
+
 loadPets()
 loadCategories()

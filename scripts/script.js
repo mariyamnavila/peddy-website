@@ -99,6 +99,26 @@ const displayDetails = (petDetails) => {
     document.getElementById('customModal').showModal();
 }
 
+const displayAdopt = () => {
+    let countdownNumber = document.getElementById('countdown');
+    let countdown = 3;
+    countdownNumber.innerText = countdown;
+    const timer = setInterval(() => {
+        countdown--;
+        countdownNumber.innerText = countdown;
+        console.log(countdown);
+
+        if (countdown > 1) {
+            setTimeout(() => {
+                document.getElementById('adoptModal').close();
+                clearInterval(timer)
+            }, 2000);
+        }
+    }, 1000);
+
+    document.getElementById('adoptModal').showModal();
+}
+
 const displayCategories = (categories) => {
     const categoryContainer = document.getElementById('categories');
     categories.forEach((category) => {
@@ -131,70 +151,18 @@ const displayPets = (pets) => {
         return
     }
 
-    // const sortByPrice = (pets) => {
-    // const sort = pets.price.sort(function(a,b) {return b - a});
-    // console.log(sort);
+    document.getElementById('sortPrice').addEventListener('click', () => {
+        displayLoader();
+        petsContainer.innerHTML = '';
 
-    // }
-
-    // const sortPets = () => {
-    //     const sortP =  pets.sort(function (a, b) { return b.price - a.price });
-    //     console.log(sortP);
-        
-    //     pets.forEach((pet) => {
-    //     // console.log(pet);
-    //     const div = document.createElement('div');
-    //     div.classList = 'p-5 space-y-2 border rounded-xl'
-    //     div.innerHTML = `
-    //         <img class='rounded-xl' src="${pet.image}" alt="">
-    //             <p class="font-bold text-xl">${pet.pet_name}</p>
-    //             <div class="flex space-x-2">
-    //                 <img src="images/breed.png" alt="">
-    //                     <p class="text-gray-600">Breed: ${pet.breed === null || pet.breed === undefined || !pet.breed ? 'Not Found' : pet.breed}</p>
-    //             </div>
-    //             <div class="flex space-x-2">
-    //                 <img src="images/birth.png" alt="">
-    //                     <p class="text-gray-600">Birth: ${pet.date_of_birth === null || pet.date_of_birth === undefined ? 'Not Found' : pet.date_of_birth
-
-    //         }</p>
-    //             </div>
-    //             <div class="flex space-x-2">
-    //                 <img src="images/gender.png" alt="">
-    //                     <p class="text-gray-600">Gender: ${pet.gender === null || pet.date_of_birth === 'undefined' || !pet.gender ? 'Not Found' : pet.gender
-
-    //         }</p>
-    //             </div>
-    //             <div class="border-b flex pb-2 space-x-2">
-    //                 <img src="images/price.png" alt="">
-    //                     <p class="text-gray-600">Price: ${pet.price === null || pet.date_of_birth === 'undefined' ? 'Not Found' : pet.price}$</p>
-    //             </div>
-    //             <div class="flex justify-between items-center mt-4">
-    //                 <button class="pet-button">
-    //                     <img src="images/like.png" alt="">
-    //                 </button>
-    //                 <button class="pet-button">Adopt</button>
-    //                 <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
-    //             </div>
-    //             `
-
-
-    //     petsContainer.append(div)
-    // })
-
-    //     return
-    // }
-
-    document.getElementById('sortPrice').addEventListener('click',()=>{
-    petsContainer.innerHTML = '';
-
-        const sortP =  pets.sort(function (a, b) { return b.price - a.price });
+        const sortP = pets.sort(function (a, b) { return b.price - a.price });
         // console.log(sortP);
-        
+
         sortP.forEach((pet) => {
-        console.log(pet);
-        const div = document.createElement('div');
-        div.classList = 'p-5 space-y-2 border rounded-xl'
-        div.innerHTML = `
+            // console.log(pet);
+            const div = document.createElement('div');
+            div.classList = 'p-5 space-y-2 border rounded-xl'
+            div.innerHTML = `
             <img class='rounded-xl' src="${pet.image}" alt="">
                 <p class="font-bold text-xl">${pet.pet_name}</p>
                 <div class="flex space-x-2">
@@ -205,13 +173,13 @@ const displayPets = (pets) => {
                     <img src="images/birth.png" alt="">
                         <p class="text-gray-600">Birth: ${pet.date_of_birth === null || pet.date_of_birth === undefined ? 'Not Found' : pet.date_of_birth
 
-            }</p>
+                }</p>
                 </div>
                 <div class="flex space-x-2">
                     <img src="images/gender.png" alt="">
                         <p class="text-gray-600">Gender: ${pet.gender === null || pet.date_of_birth === 'undefined' || !pet.gender ? 'Not Found' : pet.gender
 
-            }</p>
+                }</p>
                 </div>
                 <div class="border-b flex pb-2 space-x-2">
                     <img src="images/price.png" alt="">
@@ -227,13 +195,13 @@ const displayPets = (pets) => {
                 `
 
 
-        petsContainer.append(div)
-        return
+            petsContainer.append(div)
+            return
+        })
+
+
     })
 
-        
-    })
-    
     pets.forEach((pet) => {
         // console.log(pet);
         const div = document.createElement('div');
@@ -265,7 +233,7 @@ const displayPets = (pets) => {
                     <button class="pet-button">
                         <img src="images/like.png" alt="">
                     </button>
-                    <button class="pet-button">Adopt</button>
+                    <button onclick='displayAdopt()' class="pet-button">Adopt</button>
                     <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
                 </div>
                 `

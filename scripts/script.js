@@ -20,6 +20,35 @@ const loadDetails = (petId) => {
 
 }
 
+const loadCategoriesPets = (categoriesId) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoriesId}`)
+        .then(res => res.json())
+        .then(data => displayPets(data.data))
+        .catch(err => console.log(err))
+}
+
+
+const displayLoader = () => {
+    const petsContainer = document.getElementById('pets-container');
+
+    // Store the current pet elements (to restore later)
+    // const existingPets = petsContainer.innerHTML;
+
+    // Show the loader
+    petsContainer.innerHTML = `
+        <div class="flex justify-center items-center col-span-3 py-10">
+            <div class="loader border-4 border-gray-200 border-t-[#0E7A81] rounded-full w-12 h-12 animate-spin"></div>
+        </div>
+    `;
+
+    // After 2 seconds, load pets again (or any filtered category)
+    // setTimeout(() => {
+    //     // petsContainer.innerHTML = existingPets; // Optional: remove this if you use `loadPets()` or `loadCategoriesPets()`
+    //     loadCategoriesPets(); // uncomment this if you want to re-fetch all pets
+    // }, 2000);
+};
+
+
 const displayDetails = (petDetails) => {
     const modal = document.getElementById('modal-container');
     modal.innerHTML = `
@@ -37,7 +66,7 @@ const displayDetails = (petDetails) => {
                     </div>
                     <div class="flex space-x-2">
                         <img src="images/gender.png" alt="">
-                            <p class="text-gray-600">Vaccinated status: ${petDetails.petData.vaccinated_status === null || petDetails.petData.vaccinated_status === undefined || !petDetails.petData.vaccinated_status ? 'Not Found' : petDetails.petData.vaccinated_status}</p>
+                            <p class="text-gray-600">Vaccinated status: ${petDetails.petData.vaccinated_status === null || petDetails.petData.vaccinated_status === undefined || !petDetails.petData.vaccinated_status ? 'Not given' : petDetails.petData.vaccinated_status}</p>
                     </div>
                 </div>
                 <div class="space-y-2">
@@ -57,7 +86,7 @@ const displayDetails = (petDetails) => {
             </div>
     `
     console.log(petDetails);
-    
+
 
     document.getElementById('customModal').showModal();
 }
@@ -68,7 +97,7 @@ const displayCategories = (categories) => {
         // console.log(category);
         const div = document.createElement('div')
         div.innerHTML = `
-            <button class="button flex items-center mx-auto">
+            <button id='categoryBtn' onclick="displayLoader(); setTimeout(() => loadCategoriesPets('${category.category}'), 2000);" class="button flex items-center mx-auto">
                 <img class='w-[56px] h-[56px] mr-4' src='${category.category_icon}' />
                 ${category.category}
             </button>
@@ -80,7 +109,8 @@ const displayCategories = (categories) => {
 
 const displayPets = (pets) => {
     // console.log(pets);
-    const petsContainer = document.getElementById('pets-container')
+    const petsContainer = document.getElementById('pets-container');
+    petsContainer.innerHTML = '';
     pets.forEach((pet) => {
         // console.log(pet);
         const div = document.createElement('div');
@@ -121,6 +151,5 @@ const displayPets = (pets) => {
         petsContainer.append(div)
     })
 }
-// showModal()
 loadPets()
 loadCategories()

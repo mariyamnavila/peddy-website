@@ -46,57 +46,73 @@
                 <p class="text-gray-500">Thinking of getting a pet? Why not adopt your new best friend! They're out
                     there waiting to fill your life with love, fun, and furry cuddles.</p>
             </div>
-            <div id="categories" class="flex gap-6  justify-center">
-                
+            <div id="categories" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto ">
+
             </div>
             <div class="flex justify-between items-center my-8">
                 <p class="font-black text-2xl ">Best Deal For you</p>
                 <button class="btn border-none bg-[#0E7A81] text-white">Sort by Price</button>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-                <div id="pets-container" class="grid grid-cols-1 lg:grid-cols-3 col-span-3 gap-6">
-
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div id="pets-container"
+                    class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 md:col-span-1 lg:col-span-3 gap-6">
+                
                 </div>
-                <div class="grid grid-cols-2">
+                <div class="grid grid-cols-2 border rounded-xl">
 
                 </div>
             </div>
         </section>
+        <!-- Open the modal using ID.showModal() method -->
+        <button class="btn hidden" onclick="customModal.showModal()">open modal</button>
+        <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
+            <div class="modal-box">
+                <div id="modal-container" >
+                    
+                </div>
+                <div class="modal-action">
+                    <form method="dialog" class="w-full">
+                        <!-- if there is a button in form, it will close the modal -->
+                        <button class="btn pet-button bg-[#0E7A8133] w-full">Cancel</button>
+                    </form>
+                </div>
+            </div>
+        </dialog>
     </main>
 
     <footer class="bg-black py-24">
-        <section class="container mx-auto flex justify-between">
-            <div>
-            <div class="flex items-center space-x-3 mb-8">
-                <img class="w-7 h-6" src="images/logo.webp" alt="">
-                <p class="font-black text-3xl text-white">Peddy</p>
+        <section class="container mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+            <div class="my-4 md:mx-auto">
+                <div class="flex items-center space-x-3 mb-8">
+                    <img class="w-7 h-6" src="images/logo.webp" alt="">
+                    <p class="font-black text-3xl text-white">Peddy</p>
+                </div>
+                <div class="space-y-2 ">
+                    <p class="text-white">Location: av. Washington 165, NY CA 54003</p>
+                    <p class="text-white">Phone: +31 85 964 47 25</p>
+                    <p class="text-white">Email: info@yourdomain.com</p>
+                    <p class="text-white">Openings hours: 9.00 AM - 5.00 PM</p>
+                </div>
+                <div class="flex space-x-2 mt-6">
+                    <img class="h-8" src="images/facebook.png" alt="">
+                    <img class="h-8" src="images/x.png" alt="">
+                    <img class="h-8" src="images/youtube.png" alt="">
+                    <img class="h-8" src="images/insta.png" alt="">
+                </div>
             </div>
-            <div class="space-y-2">
-                <p class="text-white">Location: av. Washington 165, NY CA 54003</p>
-                <p class="text-white">Phone: +31 85 964 47 25</p>
-                <p class="text-white">Email: info@yourdomain.com</p>
-                <p class="text-white">Openings hours: 9.00 AM - 5.00 PM</p>
+            <div class="space-y-2 my-4 md:mx-auto">
+                <p class="text-white font-bold text-xl mb-8">Useful Links</p>
+                <p class="text-gray-400">Home</p>
+                <p class="text-gray-400">About Us</p>
+                <p class="text-gray-400">Animals</p>
+                <p class="text-gray-400">Foundation</p>
+                <p class="text-gray-400">Contact</p>
             </div>
-            <div class="flex space-x-2 mt-6">
-                <img class="h-8" src="images/facebook.png" alt="">
-                <img class="h-8" src="images/x.png" alt="">
-                <img class="h-8" src="images/youtube.png" alt="">
-                <img class="h-8"     src="images/insta.png" alt="">
+            <div class="w-60 my-4 md:mx-auto md:col-span-2 lg:col-span-1">
+                <p class="text-white font-bold text-xl mb-8">Drop a Message</p>
+                <input class="p-4 bg-[#1f1f1f] rounded-xl w-full mb-3" type="text" placeholder="Enter your email">
+                <button class="btn w-full border-none bg-[#0E7A81] text-white">Subscribe</button>
             </div>
-        </div>
-        <div class="space-y-2">
-            <p class="text-white font-bold text-xl mb-8">Useful Links</p>
-            <p class="text-gray-400">Home</p>
-            <p class="text-gray-400">About Us</p>
-            <p class="text-gray-400">Animals</p>
-            <p class="text-gray-400">Foundation</p>
-            <p class="text-gray-400">Contact</p>
-        </div>
-        <div class="w-60">
-            <p class="text-white font-bold text-xl mb-8">Drop a Message</p>
-            <input class="p-4 bg-[#1f1f1f] rounded-xl w-full mb-3" type="text" placeholder="Enter your email">
-            <button class="btn w-full border-none bg-[#0E7A81] text-white">Subscribe</button>
-        </div>
         </section>
     </footer>
     <script src="scripts/script.js"></script>

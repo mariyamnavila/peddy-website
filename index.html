@@ -59,13 +59,13 @@
                     class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 md:col-span-1 lg:col-span-3 gap-6">
 
                 </div>
-                <div class="grid grid-cols-2 border rounded-xl">
+                <div id="like-container"
+                    class="grid grid-cols-2 justify-between  border rounded-xl p-2 gap-2 content-start">
 
                 </div>
             </div>
         </section>
         <!-- adopt modal -->
-        <!-- Open the modal using ID.showModal() method -->
         <button class="btn hidden" onclick="adoptModal.showModal()">open modal</button>
         <dialog id="adoptModal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box space-y-2" id="modal">
@@ -73,16 +73,9 @@
                 <h3 class="text-center font-black text-3xl">Congrats</h3>
                 <p class="text-center font-semibold">Adoption Process is Start For your Pet</p>
                 <p class="text-center"><span id="countdown" class="text-center font-bold text-6xl"></span></p>
-                <!-- <div class="modal-action">
-                    <form method="dialog">
-                        if there is a button in form, it will close the modal
-                        <button class="btn">Close</button>
-                    </form>
-                </div> -->
             </div>
         </dialog>
         <!-- details modal -->
-        <!-- Open the modal using ID.showModal() method -->
         <button class="btn hidden" onclick="customModal.showModal()">open modal</button>
         <dialog id="customModal" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box">
@@ -91,7 +84,6 @@
                 </div>
                 <div class="modal-action">
                     <form method="dialog" class="w-full">
-                        <!-- if there is a button in form, it will close the modal -->
                         <button class="btn pet-button bg-[#0E7A8133] w-full">Cancel</button>
                     </form>
                 </div>

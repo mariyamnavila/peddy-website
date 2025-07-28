@@ -9,11 +9,6 @@ html {
   scroll-behavior: smooth;
 }
 
-body {
-  /* overflow: auto !important; */
-  overflow: visible;
-}
-
 .button {
   border-radius: 16px;
   border: 1px solid rgba(14, 122, 129, 0.15);
@@ -64,8 +59,4 @@ body {
   to {
     transform: rotate(1turn)
   }
-}
-
-.modalBackdrop.in {
-  display: none;
 }

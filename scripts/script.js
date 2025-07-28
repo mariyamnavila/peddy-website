@@ -28,6 +28,25 @@ const loadDetails = (petId) => {
         .catch(err => console.log(err))
 
 }
+const loadLikedImage = (petId) => {
+    fetch(`https://openapi.programming-hero.com/api/peddy/pet/${petId}`)
+        .then(res => res.json())
+        .then(data => displayLikedImage(data))
+        .catch(err => console.log(err))
+
+}
+
+const displayLikedImage = (pet) => {
+    const liked = document.getElementById('like-container');
+    const div = document.createElement('div');
+    div.classList = 'p-2 border rounded-xl h-[95px] ';
+    div.innerHTML = `
+    <img class='rounded-xl w-full' src='${pet.petData.image}' />
+    `
+    console.log(pet);
+
+    liked.append(div)
+}
 
 const loadCategoriesPets = (categoriesId) => {
     fetch(`https://openapi.programming-hero.com/api/peddy/category/${categoriesId}`)
@@ -40,11 +59,6 @@ const loadCategoriesPets = (categoriesId) => {
         })
         .catch(err => console.log(err))
 }
-
-// const loadSort = () => {
-//     loadPets()
-
-// }
 
 const displayLoader = () => {
     const petsContainer = document.getElementById('pets-container');
@@ -93,9 +107,7 @@ const displayDetails = (petDetails) => {
                 <p class="text-gray-600">${petDetails.petData.pet_details}</p>
             </div>
     `
-    console.log(petDetails);
-
-
+    // console.log(petDetails);
     document.getElementById('customModal').showModal();
 }
 
@@ -112,7 +124,11 @@ const displayAdopt = () => {
             setTimeout(() => {
                 document.getElementById('adoptModal').close();
                 clearInterval(timer)
+                // const dis = document.getElementsByClassName('disBtn');
+                // // dis.classList.add('btn-disabled')
+                // dis.disabled = true;
             }, 2000);
+
         }
     }, 1000);
 
@@ -189,7 +205,7 @@ const displayPets = (pets) => {
                     <button class="pet-button">
                         <img src="images/like.png" alt="">
                     </button>
-                    <button class="pet-button">Adopt</button>
+                    <button onclick='displayAdopt()' class="pet-button">Adopt</button>
                     <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
                 </div>
                 `
@@ -230,13 +246,14 @@ const displayPets = (pets) => {
                         <p class="text-gray-600">Price: ${pet.price === null || pet.date_of_birth === 'undefined' ? 'Not Found' : pet.price}$</p>
                 </div>
                 <div class="flex justify-between items-center mt-4">
-                    <button class="pet-button">
+                    <button onclick='loadLikedImage(${pet.petId})' class="pet-button">
                         <img src="images/like.png" alt="">
                     </button>
-                    <button onclick='displayAdopt()' class="pet-button">Adopt</button>
+                    <button onclick='displayAdopt()' class="disBtn pet-button">Adopt</button>
                     <button onclick='loadDetails(${pet.petId}); ; ' class="pet-button">Details</button>
                 </div>
                 `
+        console.log(pet);
 
 
         petsContainer.append(div)
